@@ -40,7 +40,7 @@ jobs:
         run: |
           ./gradlew generateGodotEditor
 
-            - name: Find APK
+      - name: Find APK
         run: |
           echo "=== APK FILES ==="
           find . -type f -name "*.apk" -print
