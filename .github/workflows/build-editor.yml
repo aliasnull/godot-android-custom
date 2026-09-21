@@ -1,1 +1,52 @@
+name: Build Godot Android Editor
 
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout Godot
+        uses: actions/checkout@v4
+        with:
+          repository: godotengine/godot
+          ref: 4.7-stable
+          submodules: recursive
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y scons pkg-config unzip wget zip
+
+      - name: Build Godot Android Editor
+        run: |
+          scons platform=android arch=arm64 target=editor
+
+      - name: Build Editor APK
+        working-directory: platform/android/java
+        run: |
+          ./gradlew generateGodotEditor
+
+      - name: Find APK
+        run: |
+          find platform/android/java -type f -name "*.apk" -print
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: godot-android-editor
+          path: platform/android/java/**/godot*.apk
+          if-no-files-found: error
