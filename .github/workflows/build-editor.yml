@@ -48,6 +48,12 @@ jobs:
           echo "=== BIN DIRECTORY ==="
           find platform/android/java/bin -maxdepth 2 -type f -print 2>/dev/null || true
 
+      - name: Inspect final APK manifest
+        run: |
+          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort -V | tail -1)/aapt dump xmltree \
+            bin/android_editor_builds/android_editor-android-debug.apk \
+            AndroidManifest.xml | grep -A 8 -B 3 "McpBridgeService"
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
