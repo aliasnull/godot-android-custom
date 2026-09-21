@@ -51,5 +51,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: godot-android-editor
-          path: platform/android/java/**/godot*.apk
+          path: bin/android_editor_builds/android_editor-android-debug.apk
           if-no-files-found: error
