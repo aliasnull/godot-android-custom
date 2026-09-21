@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: aliasnull/godot
-          ref: 4.7.2-stable
+          ref: ed1daf0bf
           submodules: recursive
 
       - name: Setup Java 17
