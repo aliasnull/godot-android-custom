@@ -12,8 +12,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: aliasnull/godot
-          ref: ed1daf0bf
+          ref: master
+          fetch-depth: 0
           submodules: recursive
+
+      - name: Checkout Godot 4.7.2
+        run: git checkout ed1daf0bf001b61586d9930840f2f1394092c079
 
       - name: Setup Java 17
         uses: actions/setup-java@v4
