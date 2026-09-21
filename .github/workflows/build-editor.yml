@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Godot
         uses: actions/checkout@v4
         with:
-          repository: godotengine/godot
+          repository: aliasnull/godot
           ref: 4.7-stable
           submodules: recursive
 
