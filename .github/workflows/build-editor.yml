@@ -40,9 +40,12 @@ jobs:
         run: |
           ./gradlew generateGodotEditor
 
-      - name: Find APK
+            - name: Find APK
         run: |
-          find platform/android/java -type f -name "*.apk" -print
+          echo "=== APK FILES ==="
+          find . -type f -name "*.apk" -print
+          echo "=== BIN DIRECTORY ==="
+          find platform/android/java/bin -maxdepth 2 -type f -print 2>/dev/null || true
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
